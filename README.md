@@ -3,7 +3,7 @@ An AHK script that removes the caption and border of the Adobe Flash Projector o
 
 ##Download and Setup
 
-There are currently two options for using realm-resize: running the source script or using a compiled .exe of the script.
+There are currently two options for using realm-resize: running the source script or using a compiled .exe of the script. The .exe is for the people who don't want to install AutoHotkey.
 
 ###Running from source
 
@@ -11,12 +11,14 @@ There are currently two options for using realm-resize: running the source scrip
 * Extract the archive to a folder of your choice
 * Install [Autohotkey](http://ahkscript.org/) for Windows
 * Run `realmresize.ahk` to initiate the script
+* Look for the script icon in the tray to know if it's running
 
 ###Running the compiled .exe
 
 * Visit [the releases page](https://github.com/Saiapatsu/realm-resize/releases) and download the latest compiled script's archive
 * Extract the archive to a folder of your choice
 * Run the included .exe
+* Look for the script icon in the tray to know if it's running
 
 I cannot guarantee the absolute safety of the .exe file.
 
@@ -24,7 +26,7 @@ I cannot guarantee the absolute safety of the .exe file.
 
 To resize a window, activate it and press <kbd>ctrl</kbd> + <kbd>F2</kbd>. Pressing this hotkey more will toggle the visibility (and usability, unfortunately) of the menu bar. If the window is not recognized as the Flash Projector or Steam client, then nothing happens.
 
-To close the window, doubleclick or press <kbd>F</kbd> at the very top right of the window. This is to replace the big red X that went with the window caption.
+To close the window, press <kbd>F</kbd> or doubleclick at the very top right of the window. This is to replace the big red X that went along with the window caption.
 
 ##Personal thanks
 
