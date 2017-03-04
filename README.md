@@ -11,7 +11,7 @@ This script is currently only available as source code, as I am unable to get th
   here](https://github.com/Saiapatsu/realm-resize/zipball/master)
 * Extract the archive to a folder of your choice
 * Install [Autohotkey](http://ahkscript.org/) for Windows
-* Run `realmscript.ahk` to initiate the script
+* Run `realmresize.ahk` to initiate the script
 
 ##Usage
 
