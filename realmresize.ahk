@@ -7,10 +7,10 @@
 #SingleInstance force ;makes iteration less tedious
 SetWorkingDir %A_ScriptDir%
 
-GroupAdd rotmg, Adobe Flash Player 1
-GroupAdd rotmg, Adobe Flash Player 2
-GroupAdd rotmg, Adobe Flash Player 3
-;matches version 1 to 39 thanks to the matching mode
+SetTitleMatchMode, 3
+Loop, 20
+	GroupAdd rotmg, % "Adobe Flash Player " A_Index + 9 ;projector
+GroupAdd rotmg, Realm of the Mad God ;steam
 
 global menuHeight, windowMenus
 SysGet, menuHeight, 15
