@@ -22,6 +22,7 @@ SetTimer, isActive, 0
 return
 
 isActive:
+Suspend, on
 WinWaitActive ahk_group rotmg
 ;clip cursor
 if windowMenus[WinExist("A")] != null
@@ -29,16 +30,28 @@ if windowMenus[WinExist("A")] != null
 	WinGetPos, posx, posy, width, height, A
 	ClipCursor(True, posx, posy, posx+width, posy+height)
 }
+Suspend, off
 WinWaitNotActive ahk_group rotmg
 ;unclip cursor
 ClipCursor(False, 0, 0, 0, 0)
 return
 
-^F2::
-IfWinActive, ahk_group rotmg
-ToggleMenu()
+~f::
+~LButton::
+WinGetPos, posx, posy, width, height, A
+MouseGetPos, mousx, mousy
+;if (!mousx and !mousy						;top left
+if (mousx = width-1 and !mousy 			;top right
+;if (!mousx and mousy = height-1			;bottom left (not recommended)
+;if (mousx = width-1 and mousy = height-1	;bottom right (not recommended)
+	and (A_ThisHotkey = "~f" or A_TimeSincePriorHotkey < 200 and A_TimeSincePriorHotkey != -1))
+{
+	WinGet, ProcessPath, ProcessPath, A
+	WinKill, ahk_group rotmg
+}
 return
 
+^F2::ToggleMenu()
 ToggleMenu()
 {
 	;find active window handle in array / add to array if not found
