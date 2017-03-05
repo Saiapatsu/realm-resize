@@ -20,13 +20,14 @@ There are currently two options for using realm-resize: running the source scrip
 * Run the included .exe
 * Look for the script icon in the tray to know if it's running
 
-I cannot guarantee the absolute safety of the .exe file.
+I cannot guarantee the absolute safety of the .exe file, use it only if you trust randos who popped up just days ago!
 
 ##Usage
 
 To resize a window, activate it and press <kbd>ctrl</kbd> + <kbd>F2</kbd>. Pressing this hotkey more will toggle the visibility (and usability, unfortunately) of the menu bar. If the window is not recognized as the Flash Projector or Steam client, then nothing happens.
 
-To close the window, press <kbd>F</kbd> or doubleclick at the very top right of the window. This is to replace the big red X that went along with the window caption.
+To close the window, press <kbd>R</kbd> at the very top right corner of the window. This can also be done with a doubleclick. To change that key, press <kbd>ctrl</kbd> + <kbd>alt</kbd> + <kbd>F2</kbd>. I suggest changing the key to your nexus key.
+This feature is to replace the big red X that went along with the window caption.
 
 ##Personal thanks
 
