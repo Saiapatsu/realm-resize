@@ -7,19 +7,38 @@
 #SingleInstance force ;makes iteration less tedious
 SetWorkingDir %A_ScriptDir%
 
+OnExit("ExitFunc")
+if A_IsCompiled
+	Menu, Tray, Icon, %A_ScriptFullPath%, 1, 1
+
+;-------------------------------Script suspender--------------------------------
+
 SetTitleMatchMode, 3
 Loop, 20
 	GroupAdd rotmg, % "Adobe Flash Player " A_Index + 9 ;projector
 GroupAdd rotmg, Realm of the Mad God ;steam
+SetTimer, isActive, 0
+
+;--------------------------------Realm Resizer----------------------------------
 
 global menuHeight, windowMenus
 SysGet, menuHeight, 15
 ;associative array for keeping track of flash player windows
 windowMenus := {}
 
-OnExit("ExitFunc")
-SetTimer, isActive, 0
-return
+;--------------------------------Configuration----------------------------------
+
+;initialize configuration gui
+global defaultNexus := "r"
+Gui, Margin, 6, 6
+Gui, Add, Hotkey, vnexusKey
+Gui, Add, Button, x+6 gsaveNexus, Save
+Gui, Add, Text, x6 vsavedText, No modifier keys allowed
+
+IniRead, nexusKey, realmresize.ini, Keybinds, Nexus, %defaultNexus%
+Hotkey, ~%nexusKey%, panic, On
+
+return ;------------------------Script suspender--------------------------------
 
 isActive:
 Suspend, on
@@ -36,7 +55,44 @@ WinWaitNotActive ahk_group rotmg
 ClipCursor(False, 0, 0, 0, 0)
 return
 
-~f::
+;--------------------------------Configuration----------------------------------
+
+^!F2::
+IniRead, nexusKey, realmresize.ini, Keybinds, Nexus, %defaultNexus%
+GuiControl,, nexusKey, %nexusKey%
+Gosub, removeSaved
+Gui, Show,, Configuration
+return
+
+saveNexus:
+oldNexus := nexusKey
+Gui, Submit, NoHide
+if nexusKey contains ^,+,!
+{
+	GuiControl,, savedText, No modifier keys allowed
+	SetTimer, removeSaved, -1000
+} else {
+	IniWrite, %nexusKey%, realmresize.ini, Keybinds, Nexus
+	Hotkey, ~%oldNexus%, panic, Off
+	Hotkey, ~%nexusKey%, panic, On
+	GuiControl,, savedText, Saved!
+	SetTimer, removeSaved, -1000
+}
+oldNexus =
+return
+
+removeSaved:
+GuiControl,, savedText
+return
+
+GuiEscape:
+Gui, Cancel
+return
+
+;---------------------------------Panic button----------------------------------
+
+;~f:: ;f key is not always the nexus key!
+panic:
 ~LButton::
 WinGetPos, posx, posy, width, height, A
 MouseGetPos, mousx, mousy
@@ -44,12 +100,14 @@ MouseGetPos, mousx, mousy
 if (mousx = width-1 and !mousy 			;top right
 ;if (!mousx and mousy = height-1			;bottom left (not recommended)
 ;if (mousx = width-1 and mousy = height-1	;bottom right (not recommended)
-	and (A_ThisHotkey = "~f" or A_TimeSincePriorHotkey < 200 and A_TimeSincePriorHotkey != -1))
+	and (A_ThisHotkey = "~LButton" ? A_TimeSincePriorHotkey < 300 and A_TimeSincePriorHotkey != -1 : 1))
 {
 	WinGet, ProcessPath, ProcessPath, A
 	WinKill, ahk_group rotmg
 }
 return
+
+;--------------------------------Realm Resizer----------------------------------
 
 ^F2::ToggleMenu()
 ToggleMenu()
@@ -89,6 +147,8 @@ ClipCursor(Confine=True, x1=0, y1=0, x2=1, y2=1)
 	VarSetCapacity(R,16,0), NumPut(x1,&R+0), NumPut(y1,&R+4), NumPut(x2,&R+8), NumPut(y2,&R+12)
 	Return Confine ? DllCall("ClipCursor", UInt,&R) : DllCall("ClipCursor")
 }
+
+;-------------------------------------------------------------------------------
 
 ExitFunc()
 {
