@@ -32,6 +32,6 @@ This feature is to replace the big red X that went along with the window caption
 ## Personal thanks
 
 I'd like to thank:
-* **[Nightfirecat](https://github.com/nightfirecat)** for a good bit of the text in this readme (I did not ask for permission) and a method to get the width of the menu bar
+* **[Nightfirecat](https://github.com/nightfirecat)** for a good bit of the text in this readme (I did not ask for permission) and a method to get the thickness of the menu bar
 * **[serenityjazz](http://forum.cockos.com/showthread.php?t=58784)** on the Reaper forums for a way to hide the menu bar of a window
 * **[x79animal](https://autohotkey.com/board/topic/61753-confining-mouse-to-a-window/)** on the AHK forums for a way to confine the mouse to a region on the screen
